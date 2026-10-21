@@ -1,0 +1,11 @@
+# nada privado entra aqui: provas, manifestos, rascunhos e segredos moram fora do repo
+.env
+*.env
+*.key
+*.pem
+*.ots
+*.bak*
+.seguranca-commit-termos
+Thumbs.db
+desktop.ini
+.DS_Store

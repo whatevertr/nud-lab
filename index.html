@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nud-lab</title>
+<meta name="description" content="nud-lab: o caderno de laboratório da whatevertr. Em breve.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fundo: #22202A; --painel: #17141D; --linha: #494554;
+    --texto: #D2CEDF; --forte: #E9E6F1; --fraco: #9C91B6;
+    --violeta: #C8A2FF; --laranja: #D97757;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --fundo: #E7DCD0; --painel: #F4EBE2; --linha: #8A8794;
+      --texto: #2C233D; --forte: #191128; --fraco: #524B65;
+      --violeta: #642DA4; --laranja: #993700;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--fundo); color: var(--texto); }
+  body {
+    font: 400 15px/1.6 "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+    min-height: 100vh; display: grid; place-items: center; padding: 24px 16px;
+  }
+  main {
+    width: 100%; max-width: 560px; background: var(--painel);
+    border: 1px solid var(--linha); padding: 32px 28px;
+  }
+  .rotulo { color: var(--fraco); font-size: 12px; letter-spacing: .15em; margin: 0 0 20px; }
+  h1 {
+    font: 400 clamp(36px, 9vw, 56px)/1 "Share Tech Mono", "IBM Plex Mono", monospace;
+    letter-spacing: .2em; color: var(--forte); margin: 0 0 8px;
+  }
+  .marcador { color: var(--laranja); }
+  .sub { color: var(--violeta); margin: 0 0 28px; }
+  p { margin: 0 0 14px; }
+  ul { list-style: none; padding: 0; margin: 24px 0 0; border-top: 1px solid var(--linha); padding-top: 16px; }
+  li { margin: 6px 0; }
+  li::before { content: "// "; color: var(--fraco); }
+  a { color: var(--violeta); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--violeta); outline-offset: 2px; }
+  .cursor { display: inline-block; width: .6em; height: 1.1em; vertical-align: text-bottom; background: var(--violeta); animation: pisca 1.1s steps(1) infinite; }
+  @keyframes pisca { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+</style>
+</head>
+<body>
+<main>
+  <p class="rotulo">// whatevertr</p>
+  <h1><span class="marcador">[·]</span> nud-lab</h1>
+  <p class="sub">o caderno de laboratório</p>
+  <p>em breve: os logs, as ideias e o que eu vou aprendendo construindo com IA.</p>
+  <p>enquanto isso <span class="cursor" aria-hidden="true"></span></p>
+  <ul>
+    <li><a href="https://whatevertr.tumblr.com">whatever-log</a> (tumblr)</li>
+    <li><a href="https://github.com/whatevertr/nud-constellation-method">o método</a> (github)</li>
+  </ul>
+</main>
+</body>
+</html>
