@@ -160,6 +160,7 @@ body.modo-ensaio .corpo{padding:0}
 /* ===== o alien e o Tars, trazidos do tema do tumblr whatevertr (cronica, v2) ===== */
 /* no computador, o Tars fica um pouco mais alto, pra não ficar em cima dos links do rodapé do menu */
 @media (min-width:901px){body #tars{bottom:150px}}
+body.na-home #tars{display:none}
   /* ===== MASCOTE ===== */
   #mascot{position:fixed;left:0;top:0;width:64px;height:64px;z-index:50;pointer-events:none;will-change:transform;}
   #mascot svg{width:100%;height:100%;display:block;image-rendering:pixelated;}
@@ -302,12 +303,18 @@ function mostra(s){
   document.querySelectorAll('.secao').forEach(e=>e.classList.remove('ativa'));
   document.body.classList.toggle('modo-ensaio',!!(s&&s.startsWith('ensaio-')));
   if(s&&s.startsWith('ensaio-')){abreEnsaio(s);document.getElementById('s-ensaio').classList.add('ativa');document.querySelectorAll('.sumario a').forEach(a=>a.classList.toggle('ativo',a.dataset.s==='noa'));window.scrollTo(0,0);return;}
-  (document.getElementById('s-'+(s||'home'))||document.getElementById('s-home')).classList.add('ativa');
+  const alvo=document.getElementById('s-'+(s||'home'))||document.getElementById('s-home');
+  alvo.classList.add('ativa');
+  // na página inicial o Tars não aparece: ele só chega depois que um capítulo é aberto
+  document.body.classList.toggle('na-home', alvo.id==='s-home');
   document.querySelectorAll('.sumario a').forEach(a=>a.classList.toggle('ativo',a.dataset.s===s));
   // no celular o menu fica em cima: desce até o conteúdo que acabou de trocar
   if(s&&window.innerWidth<=900){document.querySelector('.corpo').scrollIntoView({behavior:'smooth'})}else{window.scrollTo(0,0)}
 }
-document.querySelectorAll('.sumario a').forEach(a=>a.addEventListener('click',ev=>{ev.preventDefault();history.replaceState(null,'','#'+a.dataset.s);mostra(a.dataset.s);}));
+document.querySelectorAll('.sumario a').forEach(a=>a.addEventListener('click',ev=>{ev.preventDefault();
+  // clicar de novo no capítulo que já está aberto volta pra página inicial (e tira o # do endereço)
+  if(a.classList.contains('ativo')){history.replaceState(null,'',location.pathname);mostra('');return;}
+  history.replaceState(null,'','#'+a.dataset.s);mostra(a.dataset.s);}));
 mostra(location.hash.slice(1));
 </script>
 <script>
