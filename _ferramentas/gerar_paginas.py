@@ -11,7 +11,7 @@ Nunca edite os index.html gerados à mão. Só usa Python puro (nada pra instala
 
 O formato de um post (`_posts/AAAA-MM-DD-titulo.md`):
     ---
-    tipo: WHATEVER-LOG          (ou THINKER, ou TEXTO)
+    tipo: WHATEVER-LOG          (ou TARS-LOG, ou TEXTO)
     titulo: whatever-log 26/10/2026
     data: 2026-10-26            (ou com a hora, pra ordenar posts do mesmo dia: 2026-10-26 21:30)
     tags: wtr devlog
