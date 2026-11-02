@@ -126,6 +126,11 @@ h2.cab{font-weight:normal}
 
 /* MODO ENSAIO (v4): a página inteira é do ensaio; o menu some */
 body.modo-ensaio .lado{display:none}
+/* o ensaio é só da Noa: o Tars não entra (pedido da autora, 01/11/2026) */
+body.modo-ensaio #tars{display:none!important}
+/* o alien saiu do site (01/11/2026): com "reduzir movimento" ligado ele ficava parado no meio da tela.
+   O script dele continua rodando escondido só porque é ele que marca a hora de o Tars falar. */
+#mascot{display:none!important}
 body.modo-ensaio .casca{display:block;max-width:none;padding:0}
 body.modo-ensaio .corpo{padding:0}
 #s-ensaio{min-height:100vh;position:relative;isolation:isolate;color:#1b1820;background:#F6F4F1;animation:none}
@@ -294,15 +299,28 @@ body.na-home #tars{display:none}
 </div>
 
 <script>
-const E="assets/noa/";
-const ensaios={};   // os ensaios da Noa estão sendo refeitos (in progress)
-document.getElementById('albuns').innerHTML=Object.entries(ensaios).map(([k,e])=>`<a class="disco album" href="#${k}" onclick="ev(event,'${k}')"><img src="${E}${e.capa}.webp" alt="Noa, ${k.replace('-',' ')}: ${e.t}" loading="lazy"><div class="info"><b>${k.replace('-',' ')} · ${e.t}</b><span>${e.f.length} fotos · 2026</span></div></a>`).join('');
+// O endereço muda sem recarregar (/ → /nudfm/), e as imagens "preguiçosas" só são buscadas quando aparecem:
+// com caminho relativo, elas iam procurar no endereço novo e falhavam na primeira visita (01/11/2026).
+// Então, antes de qualquer troca de endereço, todo caminho de imagem vira absoluto.
+const E=new URL("assets/noa/",location.href).href;
+document.querySelectorAll('img[src]').forEach(i=>i.setAttribute('src',i.src));
+// cada ensaio: t (título), capa, fundo (opcional), f (as fotos, em ordem) e insp (os parágrafos da inspiração, texto da autora). Sem número: só título e ano.
+const ensaios={
+ 'ensaio-the-mask':{t:'The Mask',capa:'the-mask_01',fundo:'the-mask_fundo',f:['the-mask_01','the-mask_02','the-mask_03','the-mask_04'],insp:[
+  'A inspiração desse ensaio é o episódio "The Mask", do Coragem, o Cão Covarde: a Noa está fantasiada de Kitty, com a máscara.',
+  'Os monstros do Coragem sempre são psicológicos. Mas a Kitty, apesar de machucar o Coragem, nesse episódio não é o monstro dele: é o monstro dela mesma, por não conseguir suportar a realidade, por se sentir incapaz.',
+  'A seda contrasta com a terra. A porcelana da máscara combina com os traços do desenho do rosto. As luvas representam a sensação estranha de não saber o que tem por trás da figura. Também gosto de como tudo remete a algo quase religioso: o monstro do trauma da crença, que quase vira virtude.',
+  'No final das contas, nem todo cachorro é mau.']}
+};
+document.getElementById('albuns').innerHTML=Object.entries(ensaios).map(([k,e])=>`<a class="disco album" href="#${k}" onclick="ev(event,'${k}')"><img src="${E}${e.capa}.webp" alt="Noa, ensaio ${e.t}" loading="lazy"><div class="info"><b>${e.t}</b><span>${e.f.length} fotos · 2026</span></div></a>`).join('');
 const forma=['g','a','p','l','a','p','g','p','a','l','p','a'];
 function abreEnsaio(k){const e=ensaios[k],s=document.getElementById('s-ensaio');
- document.getElementById('ens-num').textContent=k.replace('-',' ')+' · 2026';
+ document.getElementById('ens-num').textContent='2026';
  document.getElementById('ens-sobre').textContent='noa · ensaio fotográfico';
  document.getElementById('ens-tit').textContent=e.t;
- document.getElementById('ens-insp').textContent='aqui entra a história do ensaio: de onde veio a ideia, as referências, o que a gente quis dizer. texto curto, em letra pequena, como numa revista.';
+ // a inspiração de cada ensaio, parágrafo por parágrafo, como texto (nunca como HTML)
+ const ins=document.getElementById('ens-insp');ins.replaceChildren();
+ (e.insp||[]).forEach((p,i)=>{if(i)ins.append(document.createElement('br'),document.createElement('br'));ins.append(p)});
  const fd=document.getElementById('ens-fundo');
  if(e.fundo){s.classList.add('tem-fundo');fd.style.backgroundImage=`url(${E}${e.fundo}.webp)`}else{s.classList.remove('tem-fundo');fd.style.backgroundImage='none'}
  document.getElementById('ens-fotos').innerHTML=e.f.map((f,i)=>`<figure><img src="${E}${f}.webp" alt="Noa, ensaio ${e.t}, foto ${i+1} de ${e.f.length}" loading="lazy"><figcaption>${String(i+1).padStart(2,'0')} / ${String(e.f.length).padStart(2,'0')}</figcaption></figure>`).join('');}
@@ -335,7 +353,9 @@ document.querySelectorAll('.sumario a').forEach(a=>a.addEventListener('click',ev
 addEventListener('popstate',()=>mostra(capituloDoEndereco()));
 // links antigos com # (nud-lab/#noa) vão pro endereço novo (nud-lab/noa/)
 const velho=location.hash.slice(1);
-if(['diario','noa','nudfm','sobre'].includes(velho)){history.replaceState(null,'',urlDe(velho));mostra(velho,true);}else{mostra(INICIAL,true);}
+if(['diario','noa','nudfm','sobre'].includes(velho)){history.replaceState(null,'',urlDe(velho));mostra(velho,true);}
+// o link direto de um ensaio (nud-lab/noa/#ensaio-the-mask) abre o ensaio, pra dar pra compartilhar
+else if(ensaios[velho]){mostra(velho,true);}else{mostra(INICIAL,true);}
 </script>
 <script>
 (function(){
