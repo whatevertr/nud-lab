@@ -163,6 +163,28 @@ body.modo-ensaio .corpo{padding:0}
   #s-ensaio .folha{padding:40px 20px 80px}
   #s-ensaio h2{font-size:30px}
 }
+/* ===== REVISTA (01/11/2026, rascunho da autora, prévia do cronica v5): o texto na lateral, em escadinha; as fotos no meio, 684px; no celular empilha ===== */
+#s-ensaio.revista .folha{max-width:1440px;padding:56px 32px 120px}
+#s-ensaio.revista .topo,#s-ensaio.revista h2,#s-ensaio.revista .fim{max-width:684px;margin-left:auto;margin-right:auto}
+#s-ensaio.revista .sobre{max-width:684px;margin:64px auto 6px}
+#s-ensaio.revista h2{margin-bottom:28px}
+#s-ensaio.revista .insp{display:none}
+#s-ensaio .linha{display:grid;grid-template-columns:1fr 684px 1fr;gap:32px;margin:0 0 40px}
+#s-ensaio .linha>figure,#s-ensaio .linha>.grade{grid-column:2;grid-row:1;margin:0}
+#s-ensaio .linha img{width:100%;display:block}
+#s-ensaio .linha>*{min-width:0}
+#s-ensaio .lat{font-size:12px;line-height:1.8;max-width:330px;background:rgba(0,0,0,.22);padding:12px 16px;border-left:1px solid rgba(236,234,242,.28)}
+#s-ensaio .lat p{margin:0 0 12px}#s-ensaio .lat p:last-child{margin:0}
+#s-ensaio .lat .rot{font-family:"Share Tech Mono",monospace;font-size:11px;letter-spacing:.16em;opacity:.7;display:block;margin-bottom:8px}
+#s-ensaio .lat.esq{grid-column:1;grid-row:1;justify-self:end;align-self:start}
+#s-ensaio .lat.dir{grid-column:3;grid-row:1;justify-self:start;align-self:end}
+#s-ensaio .lat a{color:#FF8A5C}
+#s-ensaio .linha.bast{margin-top:96px;padding-top:40px;border-top:1px solid rgba(236,234,242,.18)}
+#s-ensaio .grade{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+#s-ensaio .grade figure{margin:0}
+#s-ensaio .grade img{aspect-ratio:4/5;object-fit:cover;background:rgba(0,0,0,.25)}
+#s-ensaio .grade figcaption{font-size:12px;line-height:1.7;background:rgba(0,0,0,.22);padding:8px 12px;border-left:1px solid rgba(236,234,242,.28);margin-top:8px;text-transform:none;letter-spacing:0}
+@media (max-width:1100px){#s-ensaio.revista .folha{padding:40px 18px 100px}#s-ensaio .linha{grid-template-columns:minmax(0,1fr)}#s-ensaio .lat,#s-ensaio .linha>figure,#s-ensaio .linha>.grade{grid-column:1!important;grid-row:auto!important;justify-self:stretch;max-width:none}}
 /* ===== o alien e o Tars, trazidos do tema do tumblr whatevertr (cronica, v2) ===== */
 /* no computador, o Tars fica um pouco mais alto, pra não ficar em cima dos links do rodapé do menu */
 @media (min-width:901px){body #tars{bottom:150px}}
@@ -275,8 +297,38 @@ const ensaios={
   'A inspiração desse ensaio é o episódio "The Mask", do Coragem, o Cão Covarde: a Noa está fantasiada de Kitty, com a máscara.',
   'Os monstros do Coragem sempre são psicológicos. Mas a Kitty, apesar de machucar o Coragem, nesse episódio não é o monstro dele: é o monstro dela mesma, por não conseguir suportar a realidade, por se sentir incapaz.',
   'A seda contrasta com a terra. A porcelana da máscara combina com os traços do desenho do rosto. As luvas representam a sensação estranha de não saber o que tem por trás da figura. Também gosto de como tudo remete a algo quase religioso: o monstro do trauma da crença, que quase vira virtude.',
-  'No final das contas, nem todo cachorro é mau.']}
+  'No final das contas, nem todo cachorro é mau.'],
+  // o bastidor (aprovado por ela, 01/11): sem nada do vídeo, por escolha dela
+  bastidor:{intro:'Antes da Noa vestir a Kitty, cada peça nasceu sozinha.',
+   capa:['the-mask_bastidor_lookbook','o lookbook: a fantasia inteira, antes do deserto.'],
+   itens:[['the-mask_bastidor_mascara_4x5','a máscara:','do desenho pra porcelana.'],
+          ['the-mask_bastidor_vestido','o vestido e as luvas:','num manequim invisível, antes de ter dona.'],
+          ['the-mask_bastidor_ratinho','o ratinho da Bunny:','feltro, miçanga e cordão.'],
+          ['the-mask_fundo','Lugar Nenhum:','o deserto vazio, antes de ela chegar.']],
+   // o programa de afiliados exige avisar que é link de afiliada: o texto avisa
+   afiliada:'a Noa é feita no Higgsfield. se quiser testar, esse é o meu link de afiliada: usar ele me ajuda a continuar fazendo a Noa 🤍',
+   link:'https://higgsfield.ai?fpr=thaina-df6084'}}
 };
+// monta um elemento com texto (nunca HTML): el('p',{},'texto') ou el('figure',{},[filhos])
+function el(tag,at,filhos){const n=document.createElement(tag);for(const k in at)n.setAttribute(k,at[k]);[].concat(filhos||[]).forEach(f=>n.append(f));return n;}
+function revista(e){
+ const s=document.getElementById('s-ensaio');s.classList.add('revista');
+ const ps=e.insp||[],m=Math.ceil(ps.length/2);
+ const lat=(lado,rot,textos)=>el('aside',{class:'lat '+lado},[].concat(rot?el('span',{class:'rot'},rot):[],textos.map(t=>typeof t==='string'?el('p',{},t):t)));
+ const img=(f,alt)=>el('img',{src:`${E}${f}.webp`,alt:alt,loading:'lazy'});
+ const n=e.f.length,pad=x=>String(x).padStart(2,'0'),out=[];
+ // as fotos; a inspiração em escadinha ao lado da primeira (metade à esquerda em cima, metade à direita embaixo)
+ e.f.forEach((f,i)=>{const fig=el('figure',{},[img(f,`Noa, ensaio ${e.t}, foto ${i+1} de ${n}`),el('figcaption',{},`${pad(i+1)} / ${pad(n)}`)]);
+  out.push(el('div',{class:'linha'},i===0?[lat('esq','// INSPIRAÇÃO',ps.slice(0,m)),fig].concat(ps.length>m?[lat('dir','',ps.slice(m))]:[]):[fig]));});
+ const b=e.bastidor;
+ if(b){
+  out.push(el('div',{class:'linha bast'},[lat('esq','// BASTIDOR',[b.intro]),el('figure',{},[img(b.capa[0],`Noa, bastidor do ensaio ${e.t}`)]),lat('dir','',[b.capa[1]])]));
+  const grade=el('div',{class:'grade'},b.itens.map(([f,neg,resto])=>el('figure',{},[img(f,`bastidor do ensaio ${e.t}: ${neg} ${resto}`),el('figcaption',{},[el('b',{},neg),' '+resto])])));
+  const af=b.link?[lat('dir','',[el('p',{},[b.afiliada+' ',el('a',{href:b.link,target:'_blank',rel:'sponsored noopener noreferrer'},'higgsfield ↗')])])]:[];
+  out.push(el('div',{class:'linha'},[grade].concat(af)));
+ }
+ document.getElementById('ens-fotos').replaceChildren(...out);
+}
 document.getElementById('albuns').innerHTML=Object.entries(ensaios).map(([k,e])=>`<a class="disco album" href="#${k}" onclick="ev(event,'${k}')"><img src="${E}${e.capa}.webp" alt="Noa, ensaio ${e.t}" loading="lazy"><div class="info"><b>${e.t}</b><span>${e.f.length} fotos · 2026</span></div></a>`).join('');
 const forma=['g','a','p','l','a','p','g','p','a','l','p','a'];
 function abreEnsaio(k){const e=ensaios[k],s=document.getElementById('s-ensaio');
@@ -288,7 +340,7 @@ function abreEnsaio(k){const e=ensaios[k],s=document.getElementById('s-ensaio');
  (e.insp||[]).forEach((p,i)=>{if(i)ins.append(document.createElement('br'),document.createElement('br'));ins.append(p)});
  const fd=document.getElementById('ens-fundo');
  if(e.fundo){s.classList.add('tem-fundo');fd.style.backgroundImage=`url(${E}${e.fundo}.webp)`}else{s.classList.remove('tem-fundo');fd.style.backgroundImage='none'}
- document.getElementById('ens-fotos').innerHTML=e.f.map((f,i)=>`<figure><img src="${E}${f}.webp" alt="Noa, ensaio ${e.t}, foto ${i+1} de ${e.f.length}" loading="lazy"><figcaption>${String(i+1).padStart(2,'0')} / ${String(e.f.length).padStart(2,'0')}</figcaption></figure>`).join('');}
+ revista(e);}
 function ev(e,s){e.preventDefault();history.replaceState(null,'','#'+s);mostra(s);}
 function mostra(s,primeira){
   document.querySelectorAll('.secao').forEach(e=>e.classList.remove('ativa'));
