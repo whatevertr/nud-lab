@@ -21,7 +21,7 @@ O formato de um post (`_posts/AAAA-MM-DD-titulo.md`):
     **negrito**, *itálico*, [link](https://...), ![descrição da imagem](assets/posts/arquivo.webp)
     - item de lista
 
-v0.2.0 · 25/10/2026 · tars (Claude), o thinker do NUD · guardião, com a autora.
+v0.2.0 · 25/10/2026 · tars (Claude), o thinker do NUD, com a autora.
 """
 import glob, html, os, re
 
