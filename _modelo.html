@@ -41,26 +41,12 @@ a{color:var(--violeta);text-decoration:none}
 .sumario a .num{color:var(--fraco)}
 .sumario a:hover,.sumario a.ativo{color:var(--laranja)}
 .sumario a.ativo .num{color:var(--laranja)}
-.cafe{margin-top:28px;display:inline-block;border:1px solid var(--laranja);color:var(--laranja);font-family:"Share Tech Mono",monospace;font-size:13px;letter-spacing:.1em;padding:8px 14px}
-.cafe:hover{background:var(--laranja);color:var(--fundo)}
-.shell{margin-top:28px;display:block;border:1px solid var(--linha);background:var(--painel);font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--texto);max-width:264px;transition:border-color .2s}
-.shell:hover{border-color:var(--laranja)}
-.shell .barra{display:flex;align-items:center;gap:6px;padding:6px 10px;border-bottom:1px solid var(--linha)}
-.shell .barra i{width:8px;height:8px;border-radius:50%;background:var(--linha);display:inline-block}
-.shell .barra i:first-child{background:var(--laranja)}
-.shell .barra em{margin-left:auto;font-style:normal;color:var(--fraco);font-size:11px;letter-spacing:.08em}
-.shell .linha-sh{display:block;padding:10px 12px 2px}
-.shell .linha-sh b{color:var(--laranja);font-weight:normal}
-.shell .saida{display:block;padding:0 12px 10px;color:var(--violeta)}
-.shell .cur{animation:pisca 1s steps(1) infinite;color:var(--laranja)}
 .cafe-txt{margin-top:28px;display:inline-block;font-size:13px;color:var(--violeta)}
 .cafe-txt b{color:var(--laranja);font-weight:normal}
 .cafe-txt .cur{animation:pisca 1s steps(1) infinite;color:var(--laranja)}
 .cafe-txt:hover{color:var(--laranja)}
 @keyframes pisca{50%{opacity:0}}
 .rodape{margin-top:auto;font-size:12px;color:var(--fraco)}
-.tema{background:none;border:1px solid var(--linha);color:var(--texto);font-family:inherit;font-size:12px;padding:4px 10px;cursor:pointer;letter-spacing:.1em}
-.tema small{color:var(--fraco)}
 .redes{margin:14px 0 0}
 .redes a{margin-right:14px;font-size:12px}
 .corpo{padding:64px 0 120px;min-width:0}
@@ -70,12 +56,10 @@ h2.cab{font-weight:normal}
 .secao{display:none;animation:entra .35s ease}
 .secao.ativa{display:block}
 @keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.home-vazia{height:70vh;display:flex;align-items:flex-end;color:var(--fraco);font-size:13px}
 .cartao{border-top:1px solid var(--linha);padding:26px 0 30px;max-width:640px}
 .etq{display:flex;justify-content:space-between;font-family:"Share Tech Mono",monospace;font-size:12px;color:var(--fraco);letter-spacing:.12em}
 .cartao h3{font-family:"Share Tech Mono",monospace;color:var(--forte);font-size:22px;margin:10px 0 8px;font-weight:normal}
 .cartao p{margin:0 0 10px}
-.mais{color:var(--fraco);font-size:12px;padding:20px 0}
 .emobra{color:var(--fraco);font-size:13px;margin:18px 0 0}
 /* o texto dos posts que vieram dos tumblrs */
 .cartao time{color:var(--fraco)}
@@ -88,7 +72,6 @@ h2.cab{font-weight:normal}
 .post blockquote{border-left:2px solid var(--linha);margin:10px 0;padding-left:14px;color:var(--fraco)}
 .pe{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;font-size:12px}
 .pe .tags{color:var(--fraco)}
-.nota{border:1px dashed var(--laranja);color:var(--laranja);padding:10px 14px;font-size:12px;margin:0 0 28px;max-width:640px}
 /* cabeçalho dos capítulos (NOA, NUD.FM) */
 .cab{font-family:"Share Tech Mono",monospace;color:var(--forte);font-size:30px;letter-spacing:.14em;margin:0 0 4px}
 .cab small{display:block;font-size:13px;color:var(--violeta);letter-spacing:.08em}
@@ -111,10 +94,6 @@ h2.cab{font-weight:normal}
 .disco .info .lnk{margin-top:8px;display:flex;gap:16px}
 .disco .info .lnk a{font-size:11px;color:var(--fraco);letter-spacing:.06em}
 .disco .info .lnk a:hover{color:var(--violeta)}
-.volta{font-family:"Share Tech Mono",monospace;font-size:12px;letter-spacing:.12em;color:var(--fraco)}
-.volta:hover{color:var(--laranja)}
-.historia{max-width:640px;margin:18px 0 6px}
-.historia .etq{display:flex}
 .lista{max-width:640px}.lista .item{border-top:1px solid var(--linha);padding:18px 0}
 
 /* o alien saiu do site (01/11/2026): com "reduzir movimento" ligado ele ficava parado no meio da tela.
@@ -127,10 +106,8 @@ h2.cab{font-weight:normal}
   .lado{position:static;height:auto;padding:40px 0 8px}
   .titulo{font-size:30px}
   .sub{margin-bottom:28px}
-  .shell{max-width:none}
   .rodape{margin-top:28px}
   .corpo{padding:24px 0 80px;border-top:1px solid var(--linha)}
-  .home-vazia{height:auto;padding:8px 0}
 }
 /* ===== o alien e o Tars, trazidos do tema do tumblr whatevertr ===== */
 /* no computador, o Tars fica um pouco mais alto, pra não ficar em cima dos links do rodapé do menu */
@@ -148,7 +125,7 @@ body.na-home #tars{display:none}
   /* ===== TARS ===== */
   #tars{position:fixed;left:20vw;bottom:48px;width:96px;height:96px;z-index:55;pointer-events:none;image-rendering:pixelated;transform-origin:50% 50%;}
   #tars svg{width:100%;height:100%;display:block;image-rendering:pixelated;}
-  #tars .speech{position:absolute;left:0;right:auto;bottom:100%;margin-bottom:10px;min-width:170px;max-width:min(240px,calc(100vw - 24px));padding:8px 10px;border:1px solid var(--mean);border-radius:2px;background:var(--panel);color:var(--ink2);font-family:var(--mono);font-size:11px;line-height:1.35;display:none;}
+  #tars .speech{position:absolute;left:0;right:auto;bottom:100%;margin-bottom:10px;min-width:170px;max-width:min(240px,calc(100vw - 24px));padding:8px 10px;border-radius:2px;font-size:11px;line-height:1.35;display:none;}
   #tars.talking .speech{display:block;}
   @keyframes tarsRespira{0%,100%{transform:scale(1);filter:brightness(1);}50%{transform:scale(1.035);filter:brightness(1.14);}}
   #tars svg{animation:tarsRespira 7s cubic-bezier(.4,0,.2,1) infinite;transform-origin:50% 50%;}
@@ -313,7 +290,7 @@ else if(Object.hasOwn(ENSAIOS_FORA,velho)){mostra('noa',true);location.replace(E
     tars.classList.remove('talking');
   }
 
-  function activity(isScroll){ lastAct=performance.now(); if(sleeping){sleeping=false;bed=null;m.classList.remove('sleeping'); tarsCala();} }
+  function activity(){ lastAct=performance.now(); if(sleeping){sleeping=false;bed=null;m.classList.remove('sleeping'); tarsCala();} }
   ['scroll','wheel','touchstart','touchmove','keydown','click','resize'].forEach(ev=>addEventListener(ev,()=>{
     if(ev==='scroll'){const s=scrollY; vy+=(s-last)*0.056; last=s;}
     activity();
