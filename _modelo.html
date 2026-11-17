@@ -89,20 +89,16 @@ h2.cab{font-weight:normal}
 .pe{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;font-size:12px}
 .pe .tags{color:var(--fraco)}
 .nota{border:1px dashed var(--laranja);color:var(--laranja);padding:10px 14px;font-size:12px;margin:0 0 28px;max-width:640px}
-/* NOA: galeria em "tetris" (masonry por colunas) */
+/* cabeçalho dos capítulos (NOA, NUD.FM) */
 .cab{font-family:"Share Tech Mono",monospace;color:var(--forte);font-size:30px;letter-spacing:.14em;margin:0 0 4px}
 .cab small{display:block;font-size:13px;color:var(--violeta);letter-spacing:.08em}
-.tetris{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:110px;grid-auto-flow:dense;gap:10px;margin-top:22px}
-.tetris figure{margin:0;position:relative;overflow:hidden;border:1px solid var(--linha)}
-.tetris figure.g{grid-column:span 2;grid-row:span 4}
-.tetris figure.a{grid-row:span 3}
-.tetris figure.l{grid-column:span 2;grid-row:span 2}
-.tetris figure.p{grid-row:span 2}
-.tetris img{width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block;transition:transform .5s ease}
-.tetris figure:hover img{transform:scale(1.04)}
-.tetris figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 10px 8px;font-family:"Share Tech Mono",monospace;font-size:11px;letter-spacing:.1em;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7));opacity:0;transition:opacity .3s}
-.tetris figure:hover figcaption{opacity:1}
-/* NUD.FM */
+/* DIÁRIO: o filtro por tipo de post */
+.filtro{display:flex;flex-wrap:wrap;gap:6px 24px;max-width:640px;margin:0 0 18px}
+.filtro button{background:none;border:0;padding:7px 0;font-family:"Share Tech Mono",monospace;font-size:12px;letter-spacing:.12em;color:var(--fraco);cursor:pointer}
+.filtro button:hover{color:var(--violeta)}
+.filtro button[aria-pressed="true"]{color:var(--laranja);text-decoration:underline;text-underline-offset:5px}
+.filtro button:focus-visible{outline:2px solid var(--violeta);outline-offset:3px}
+/* NUD.FM e as capas dos ensaios da Noa */
 .discos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:22px}
 .disco{border:1px solid var(--linha);background:var(--painel)}
 .disco img{width:100%;display:block}
@@ -121,31 +117,9 @@ h2.cab{font-weight:normal}
 .historia .etq{display:flex}
 .lista{max-width:640px}.lista .item{border-top:1px solid var(--linha);padding:18px 0}
 
-/* MODO ENSAIO (v4): a página inteira é do ensaio; o menu some */
-body.modo-ensaio .lado{display:none}
-/* o ensaio é só da Noa: o Tars não entra (pedido da autora, 01/11/2026) */
-body.modo-ensaio #tars{display:none!important}
 /* o alien saiu do site (01/11/2026): com "reduzir movimento" ligado ele ficava parado no meio da tela.
    O script dele continua rodando escondido só porque é ele que marca a hora de o Tars falar. */
 #mascot{display:none!important}
-body.modo-ensaio .casca{display:block;max-width:none;padding:0}
-body.modo-ensaio .corpo{padding:0}
-#s-ensaio{min-height:100vh;position:relative;isolation:isolate;color:#1b1820;background:#F6F4F1;animation:none}
-#s-ensaio .fundo{position:absolute;inset:0;z-index:-1;background-size:cover;background-position:center top;background-repeat:repeat-y;display:none}
-#s-ensaio.tem-fundo{color:#ECEAF2;background:#0d0c12}
-#s-ensaio.tem-fundo .fundo{display:block;filter:blur(8px) brightness(.32) saturate(1.1)}
-#s-ensaio .folha{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:56px 24px 120px}
-#s-ensaio .topo{display:flex;justify-content:space-between;font-family:"Share Tech Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
-#s-ensaio .topo a{color:inherit}
-#s-ensaio .sobre{font-family:"Share Tech Mono",monospace;font-weight:normal;font-size:13px;letter-spacing:.3em;text-transform:uppercase;margin:64px 0 6px}
-#s-ensaio h2{font-family:"Share Tech Mono",monospace;font-weight:normal;font-size:40px;letter-spacing:.12em;margin:0 0 28px;line-height:1.1}
-#s-ensaio .insp{font-size:12px;line-height:1.8;max-width:520px;opacity:.85;margin:0 0 56px}
-#s-ensaio .insp b{font-family:"Share Tech Mono",monospace;font-weight:normal;letter-spacing:.14em;display:block;margin-bottom:6px;font-size:11px;opacity:.7}
-#s-ensaio figure{margin:0 0 40px}
-#s-ensaio figure img{width:100%;display:block}
-#s-ensaio figcaption{font-family:"Share Tech Mono",monospace;font-size:10px;letter-spacing:.16em;margin-top:8px;opacity:.6;text-transform:uppercase}
-#s-ensaio .fim{font-family:"Share Tech Mono",monospace;font-size:11px;letter-spacing:.16em;text-align:center;opacity:.6;margin-top:56px}
-#s-ensaio .fim a{color:inherit}
 
 /* CELULAR E TABLET: o menu vai pra cima e o conteúdo vem embaixo, numa coluna só */
 @media (max-width:900px){
@@ -157,31 +131,7 @@ body.modo-ensaio .corpo{padding:0}
   .rodape{margin-top:28px}
   .corpo{padding:24px 0 80px;border-top:1px solid var(--linha)}
   .home-vazia{height:auto;padding:8px 0}
-  #s-ensaio .folha{padding:40px 20px 80px}
-  #s-ensaio h2{font-size:30px}
 }
-/* ===== REVISTA (01/11/2026): o texto na lateral, em escadinha; as fotos no meio, 684px; no celular empilha ===== */
-#s-ensaio.revista .folha{max-width:1440px;padding:56px 32px 120px}
-#s-ensaio.revista .topo,#s-ensaio.revista h2,#s-ensaio.revista .fim{max-width:684px;margin-left:auto;margin-right:auto}
-#s-ensaio.revista .sobre{max-width:684px;margin:64px auto 6px}
-#s-ensaio.revista h2{margin-bottom:28px}
-#s-ensaio.revista .insp{display:none}
-#s-ensaio .linha{display:grid;grid-template-columns:1fr 684px 1fr;gap:32px;margin:0 0 40px}
-#s-ensaio .linha>figure,#s-ensaio .linha>.grade{grid-column:2;grid-row:1;margin:0}
-#s-ensaio .linha img{width:100%;display:block}
-#s-ensaio .linha>*{min-width:0}
-#s-ensaio .lat{font-size:12px;line-height:1.8;max-width:330px;background:rgba(0,0,0,.22);padding:12px 16px;border-left:1px solid rgba(236,234,242,.28)}
-#s-ensaio .lat p{margin:0 0 12px}#s-ensaio .lat p:last-child{margin:0}
-#s-ensaio .lat .rot{font-family:"Share Tech Mono",monospace;font-size:11px;letter-spacing:.16em;opacity:.7;display:block;margin-bottom:8px}
-#s-ensaio .lat.esq{grid-column:1;grid-row:1;justify-self:end;align-self:start}
-#s-ensaio .lat.dir{grid-column:3;grid-row:1;justify-self:start;align-self:end}
-#s-ensaio .lat a{color:#FF8A5C}
-#s-ensaio .linha.bast{margin-top:96px;padding-top:40px;border-top:1px solid rgba(236,234,242,.18)}
-#s-ensaio .grade{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
-#s-ensaio .grade figure{margin:0}
-#s-ensaio .grade img{aspect-ratio:4/5;object-fit:cover;background:rgba(0,0,0,.25)}
-#s-ensaio .grade figcaption{font-size:12px;line-height:1.7;background:rgba(0,0,0,.22);padding:8px 12px;border-left:1px solid rgba(236,234,242,.28);margin-top:8px;text-transform:none;letter-spacing:0}
-@media (max-width:1100px){#s-ensaio.revista .folha{padding:40px 18px 100px}#s-ensaio .linha{grid-template-columns:minmax(0,1fr)}#s-ensaio .lat,#s-ensaio .linha>figure,#s-ensaio .linha>.grade{grid-column:1!important;grid-row:auto!important;justify-self:stretch;max-width:none}}
 /* ===== o alien e o Tars, trazidos do tema do tumblr whatevertr ===== */
 /* no computador, o Tars fica um pouco mais alto, pra não ficar em cima dos links do rodapé do menu */
 @media (min-width:901px){body #tars{bottom:150px}}
@@ -253,19 +203,11 @@ __DIARIO__
 
   <section class="secao" id="s-noa">
     <h2 class="cab">NOA<small>ensaios fotográficos · cada um é um álbum</small></h2>
-    <p class="emobra">🚧 in progress: os ensaios estão sendo refeitos, agora com significado.</p>
-    <div class="discos" id="albuns"></div>
-  </section>
-
-  <section class="secao" id="s-ensaio">
-    <div class="fundo" id="ens-fundo"></div>
-    <div class="folha">
-      <div class="topo"><a href="#noa" onclick="ev(event,'noa')">← nud-lab / noa</a><span id="ens-num"></span></div>
-      <p class="sobre" id="ens-sobre"></p>
-      <h2 id="ens-tit"></h2>
-      <p class="insp"><b>// INSPIRAÇÃO</b><span id="ens-insp"></span></p>
-      <div id="ens-fotos"></div>
-      <div class="fim"><a href="#noa" onclick="ev(event,'noa')">← voltar pros ensaios</a></div>
+    <p class="emobra">os ensaios moram no site da Noa: cada capa abre o seu.</p>
+    <!-- as capas vêm do site da Noa, onde os ensaios moram -->
+    <div class="discos">
+      <a class="disco album" href="https://noa.nerdunitdescription.workers.dev/the-mask/" target="_blank" rel="noopener noreferrer"><img src="https://noa.nerdunitdescription.workers.dev/the-mask/img/01.webp" alt="" loading="lazy"><div class="info"><b>The Mask</b><span>4 fotos · 2026 ↗</span></div></a>
+      <a class="disco album" href="https://noa.nerdunitdescription.workers.dev/radio/" target="_blank" rel="noopener noreferrer"><img src="https://noa.nerdunitdescription.workers.dev/radio/img/02.webp" alt="" loading="lazy"><div class="info"><b>a radio station for thinking</b><span>8 fotos · 2026 ↗</span></div></a>
     </div>
   </section>
 
@@ -286,63 +228,17 @@ __DIARIO__
 // O endereço muda sem recarregar (/ → /nudfm/), e as imagens "preguiçosas" só são buscadas quando aparecem:
 // com caminho relativo, elas iam procurar no endereço novo e falhavam na primeira visita (01/11/2026).
 // Então, antes de qualquer troca de endereço, todo caminho de imagem vira absoluto.
-const E=new URL("__RAIZ__assets/noa/",location.href).href;
 document.querySelectorAll('img[src]').forEach(i=>i.setAttribute('src',i.src));
-// cada ensaio: t (título), capa, fundo (opcional), f (as fotos, em ordem) e insp (os parágrafos da inspiração, texto da autora). Sem número: só título e ano.
-const ensaios={
- 'ensaio-the-mask':{t:'The Mask',capa:'the-mask_01',fundo:'the-mask_fundo',f:['the-mask_01','the-mask_02','the-mask_03','the-mask_04'],insp:[
-  'A inspiração desse ensaio é o episódio "The Mask", do Coragem, o Cão Covarde: a Noa está fantasiada de Kitty, com a máscara.',
-  'Os monstros do Coragem sempre são psicológicos. Mas a Kitty, apesar de machucar o Coragem, nesse episódio não é o monstro dele: é o monstro dela mesma, por não conseguir suportar a realidade, por se sentir incapaz.',
-  'A seda contrasta com a terra. A porcelana da máscara combina com os traços do desenho do rosto. As luvas representam a sensação estranha de não saber o que tem por trás da figura. Também gosto de como tudo remete a algo quase religioso: o monstro do trauma da crença, que quase vira virtude.',
-  'No final das contas, nem todo cachorro é mau.'],
-  // o bastidor (aprovado por ela, 01/11): sem nada do vídeo, por escolha dela
-  bastidor:{intro:'Antes da Noa vestir a Kitty, cada peça nasceu sozinha.',
-   capa:['the-mask_bastidor_lookbook','o lookbook: a fantasia inteira, antes do deserto.'],
-   itens:[['the-mask_bastidor_mascara_4x5','a máscara:','do desenho pra porcelana.'],
-          ['the-mask_bastidor_vestido','o vestido e as luvas:','num manequim invisível, antes de ter dona.'],
-          ['the-mask_bastidor_ratinho','o ratinho da Bunny:','feltro, miçanga e cordão.'],
-          ['the-mask_fundo','Lugar Nenhum:','o deserto vazio, antes de ela chegar.']],
-   // o programa de afiliados exige avisar que é link de afiliada: o texto avisa
-   afiliada:'a Noa é feita no Higgsfield. se quiser testar, esse é o meu link de afiliada: usar ele me ajuda a continuar fazendo a Noa 🤍',
-   link:'https://higgsfield.ai?fpr=thaina-df6084'}}
-};
-// monta um elemento com texto (nunca HTML): el('p',{},'texto') ou el('figure',{},[filhos])
-function el(tag,at,filhos){const n=document.createElement(tag);for(const k in at)n.setAttribute(k,at[k]);[].concat(filhos||[]).forEach(f=>n.append(f));return n;}
-function revista(e){
- const s=document.getElementById('s-ensaio');s.classList.add('revista');
- const ps=e.insp||[],m=Math.ceil(ps.length/2);
- const lat=(lado,rot,textos)=>el('aside',{class:'lat '+lado},[].concat(rot?el('span',{class:'rot'},rot):[],textos.map(t=>typeof t==='string'?el('p',{},t):t)));
- const img=(f,alt)=>el('img',{src:`${E}${f}.webp`,alt:alt,loading:'lazy'});
- const n=e.f.length,pad=x=>String(x).padStart(2,'0'),out=[];
- // as fotos; a inspiração em escadinha ao lado da primeira (metade à esquerda em cima, metade à direita embaixo)
- e.f.forEach((f,i)=>{const fig=el('figure',{},[img(f,`Noa, ensaio ${e.t}, foto ${i+1} de ${n}`),el('figcaption',{},`${pad(i+1)} / ${pad(n)}`)]);
-  out.push(el('div',{class:'linha'},i===0?[lat('esq','// INSPIRAÇÃO',ps.slice(0,m)),fig].concat(ps.length>m?[lat('dir','',ps.slice(m))]:[]):[fig]));});
- const b=e.bastidor;
- if(b){
-  out.push(el('div',{class:'linha bast'},[lat('esq','// BASTIDOR',[b.intro]),el('figure',{},[img(b.capa[0],`Noa, bastidor do ensaio ${e.t}`)]),lat('dir','',[b.capa[1]])]));
-  const grade=el('div',{class:'grade'},b.itens.map(([f,neg,resto])=>el('figure',{},[img(f,`bastidor do ensaio ${e.t}: ${neg} ${resto}`),el('figcaption',{},[el('b',{},neg),' '+resto])])));
-  const af=b.link?[lat('dir','',[el('p',{},[b.afiliada+' ',el('a',{href:b.link,target:'_blank',rel:'sponsored noopener noreferrer'},'higgsfield ↗')])])]:[];
-  out.push(el('div',{class:'linha'},[grade].concat(af)));
- }
- document.getElementById('ens-fotos').replaceChildren(...out);
-}
-document.getElementById('albuns').innerHTML=Object.entries(ensaios).map(([k,e])=>`<a class="disco album" href="#${k}" onclick="ev(event,'${k}')"><img src="${E}${e.capa}.webp" alt="Noa, ensaio ${e.t}" loading="lazy"><div class="info"><b>${e.t}</b><span>${e.f.length} fotos · 2026</span></div></a>`).join('');
-const forma=['g','a','p','l','a','p','g','p','a','l','p','a'];
-function abreEnsaio(k){const e=ensaios[k],s=document.getElementById('s-ensaio');
- document.getElementById('ens-num').textContent='2026';
- document.getElementById('ens-sobre').textContent='noa · ensaio fotográfico';
- document.getElementById('ens-tit').textContent=e.t;
- // a inspiração de cada ensaio, parágrafo por parágrafo, como texto (nunca como HTML)
- const ins=document.getElementById('ens-insp');ins.replaceChildren();
- (e.insp||[]).forEach((p,i)=>{if(i)ins.append(document.createElement('br'),document.createElement('br'));ins.append(p)});
- const fd=document.getElementById('ens-fundo');
- if(e.fundo){s.classList.add('tem-fundo');fd.style.backgroundImage=`url(${E}${e.fundo}.webp)`}else{s.classList.remove('tem-fundo');fd.style.backgroundImage='none'}
- revista(e);}
-function ev(e,s){e.preventDefault();history.replaceState(null,'','#'+s);mostra(s);}
+// o filtro do diário: mostra só os posts do tipo escolhido; //TUDO_ mostra todos
+document.querySelectorAll('.filtro button').forEach(b=>b.addEventListener('click',()=>{
+ const t=b.dataset.tipo;
+ document.querySelectorAll('.filtro button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+ document.querySelectorAll('#s-diario .cartao').forEach(c=>{c.hidden=!!t&&c.dataset.tipo!==t;});
+}));
+// os ensaios moram no site da Noa: o link antigo (nud-lab/noa/#ensaio-the-mask) leva pra lá
+const ENSAIOS_FORA={'ensaio-the-mask':'https://noa.nerdunitdescription.workers.dev/the-mask/'};
 function mostra(s,primeira){
   document.querySelectorAll('.secao').forEach(e=>e.classList.remove('ativa'));
-  document.body.classList.toggle('modo-ensaio',!!(s&&s.startsWith('ensaio-')));
-  if(s&&s.startsWith('ensaio-')){abreEnsaio(s);document.getElementById('s-ensaio').classList.add('ativa');document.querySelectorAll('.sumario a').forEach(a=>a.classList.toggle('ativo',a.dataset.s==='noa'));window.scrollTo(0,0);return;}
   const alvo=document.getElementById('s-'+(s||'home'))||document.getElementById('s-home');
   alvo.classList.add('ativa');
   // na página inicial o Tars não aparece: ele só chega depois que um capítulo é aberto
@@ -368,8 +264,8 @@ addEventListener('popstate',()=>mostra(capituloDoEndereco()));
 // links antigos com # (nud-lab/#noa) vão pro endereço novo (nud-lab/noa/)
 const velho=location.hash.slice(1);
 if(['diario','noa','nudfm','sobre'].includes(velho)){history.replaceState(null,'',urlDe(velho));mostra(velho,true);}
-// o link direto de um ensaio (nud-lab/noa/#ensaio-the-mask) abre o ensaio, pra dar pra compartilhar
-else if(ensaios[velho]){mostra(velho,true);}else{mostra(INICIAL,true);}
+// o link antigo de um ensaio leva pro ensaio no site da Noa
+else if(Object.hasOwn(ENSAIOS_FORA,velho)){mostra('noa',true);location.replace(ENSAIOS_FORA[velho]);}else{mostra(INICIAL,true);}
 </script>
 <script>
 (function(){
