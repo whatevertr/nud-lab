@@ -6,6 +6,7 @@
 *.ots
 *.bak*
 .seguranca-commit-termos
+.seguranca-commit-ignorar
 Thumbs.db
 desktop.ini
 .DS_Store

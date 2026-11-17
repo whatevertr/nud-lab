@@ -87,7 +87,7 @@ def cartao(cab, corpo):
     if origem:
         onde = "tumblr do NUD" if "nerdunitdescription" in origem else ("tumblr whatevertr" if "tumblr" in origem else "post original")
         pe_link = f'<a href="{html.escape(origem)}" target="_blank" rel="noopener noreferrer">ver no {onde} ↗</a>'
-    return (f'<article class="cartao"><div class="etq"><span>//{html.escape(cab["tipo"])}_</span><time datetime="{d}">{data_br}</time></div>'
+    return (f'<article class="cartao" data-tipo="{html.escape(cab["tipo"])}"><div class="etq"><span>//{html.escape(cab["tipo"])}_</span><time datetime="{d}">{data_br}</time></div>'
             f'<h3>{html.escape(cab["titulo"])}</h3><div class="post">{corpo_html}</div>'
             f'<div class="pe"><span class="tags">{tags}</span>{pe_link}</div></article>')
 
@@ -95,6 +95,17 @@ def cartao(cab, corpo):
 posts = [ler_post(p) for p in glob.glob(os.path.join(RAIZ_REPO, "_posts", "*.md"))]
 posts.sort(key=lambda x: x[0]["data"], reverse=True)
 diario = "\n".join(cartao(c, b) for c, b in posts)
+
+# o filtro do diário: //TUDO_ e uma aba por tipo; tipo novo entra no fim
+ORDEM = ["TARS-LOG", "WHATEVER-LOG", "TEXTO"]
+tipos = ORDEM + sorted({c["tipo"] for c, _ in posts} - set(ORDEM))
+tipos = [t for t in tipos if any(c["tipo"] == t for c, _ in posts)]
+def aba(rotulo, valor, ligada):
+    # o // e o _ são enfeite: o leitor de tela lê só o nome
+    return (f'<button type="button" data-tipo="{html.escape(valor)}" aria-pressed="{"true" if ligada else "false"}">'
+            f'<span aria-hidden="true">//</span>{html.escape(rotulo)}<span aria-hidden="true">_</span></button>')
+abas = [aba("TUDO", "", True)] + [aba(t, t, False) for t in tipos]
+diario = '<div class="filtro" role="group" aria-label="filtrar o diário por tipo">' + "".join(abas) + "</div>\n" + diario
 
 modelo = open(os.path.join(RAIZ_REPO, "_modelo.html"), encoding="utf-8").read()
 if "__DIARIO__" not in modelo:
